@@ -20,7 +20,7 @@ public class ClothScreen {
         general.addEntry(eb.startIntSlider(Component.translatable("config.lightoverlay.reach"), LightOverlay.reach, 1, 64).setDefaultValue(12).setTextGetter(integer -> Component.nullToEmpty("Reach: " + integer + " Blocks")).setSaveConsumer(integer -> LightOverlay.reach = integer).build());
         IntegerSliderEntry crossLevel = eb.startIntSlider(Component.translatable("config.lightoverlay.crossLevel"), LightOverlay.crossLevel, 0, 15).setDefaultValue(0).setTextGetter(integer -> Component.nullToEmpty("Cross Level: " + integer)).setSaveConsumer(integer -> LightOverlay.crossLevel = integer).build();
         general.addEntry(crossLevel);
-        general.addEntry(eb.startIntSlider(Component.translatable("config.lightoverlay.secondaryLevel"), LightOverlay.secondaryLevel, -1, 15)
+        general.addEntry(eb.startIntSlider(Component.translatable("config.lightoverlay.secondaryLevel"), LightOverlay.secondaryLevel, 0, 15)
               .setDefaultValue(7).setTextGetter(integer -> Component.literal(integer < 0 ? "Off" : "Level: " + integer)).setSaveConsumer(integer -> LightOverlay.secondaryLevel = integer).build());
         general.addEntry(eb.startBooleanToggle(Component.translatable("config.lightoverlay.showNumber"), LightOverlay.showNumber).setDefaultValue(false).setSaveConsumer(bool -> LightOverlay.showNumber = bool).build());
         general.addEntry(eb.startBooleanToggle(Component.translatable("config.lightoverlay.underwater"), LightOverlay.underwater).setDefaultValue(false).setSaveConsumer(bool -> LightOverlay.underwater = bool).build());

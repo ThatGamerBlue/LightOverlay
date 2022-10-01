@@ -19,7 +19,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkStatus;
@@ -272,12 +271,13 @@ public class LightOverlayTicker {
         int skyLightLevel = sky.getLightValue(pos);
         if (blockLightLevel > LightOverlay.higherCrossLevel)
             return LightOverlay.CROSS_NONE;
-        if (LightOverlay.lowerCrossLevel >= blockLightLevel) {
+        if (blockLightLevel > LightOverlay.lowerCrossLevel) {
+            return LightOverlay.higherCross;
+        }
+        if (Math.max(skyLightLevel, blockLightLevel) <= LightOverlay.lowerCrossLevel) {
             return LightOverlay.CROSS_RED;
         }
-        if (skyLightLevel > LightOverlay.higherCrossLevel)
-            return LightOverlay.higherCross;
-        return skyLightLevel <= LightOverlay.lowerCrossLevel ? LightOverlay.lowerCross : LightOverlay.higherCross;
+        return LightOverlay.lowerCross;
     }
     
     @ExpectPlatform
