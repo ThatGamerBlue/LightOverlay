@@ -272,10 +272,12 @@ public class LightOverlayTicker {
         int skyLightLevel = sky.getLightValue(pos);
         if (blockLightLevel > LightOverlay.higherCrossLevel)
             return LightOverlay.CROSS_NONE;
+        if (LightOverlay.lowerCrossLevel >= blockLightLevel) {
+            return LightOverlay.CROSS_RED;
+        }
         if (skyLightLevel > LightOverlay.higherCrossLevel)
             return LightOverlay.higherCross;
-        return LightOverlay.lowerCrossLevel >= 0 && blockLightLevel > LightOverlay.lowerCrossLevel ?
-                LightOverlay.lowerCross : LightOverlay.CROSS_RED;
+        return skyLightLevel <= LightOverlay.lowerCrossLevel ? LightOverlay.lowerCross : LightOverlay.higherCross;
     }
     
     @ExpectPlatform
